@@ -36,7 +36,7 @@ func TestDockerContainerRemove(t *testing.T) {
 	}
 }
 
-func TestDockerContainer_Stop(t *testing.T) {
+func TestDockerContainerStop(t *testing.T) {
 	dc, err := NewDockerContainer()
 	if err != nil {
 		t.Fatal(err)
@@ -46,6 +46,20 @@ func TestDockerContainer_Stop(t *testing.T) {
 	}()
 
 	err = dc.Stop("test")
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestDockerContainerStart(t *testing.T) {
+	dc, err := NewDockerContainer()
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer func() {
+		dc.Close()
+	}()
+	err = dc.Start("test")
 	if err != nil {
 		t.Fatal(err)
 	}
