@@ -11,7 +11,10 @@ func TestDockerContainerRun(t *testing.T) {
 		dc.Close()
 	}()
 
-	_ = dc.Remove("test")
+	err = dc.Remove("test")
+	if err != nil {
+		t.Log(err)
+	}	
 
 	id, err := dc.Run("test")
 	if err != nil {
